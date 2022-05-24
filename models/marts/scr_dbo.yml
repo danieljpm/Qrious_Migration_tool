@@ -6,3 +6,4 @@ sources:
   tables:
   - name: load_customer
     description: Table containing data for load_customer
+  - name: load_employee
