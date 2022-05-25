@@ -22,14 +22,14 @@
 merge into {{ target_relation }} as DBT_INTERNAL_DEST
 using (
 select
-{% for column in dest_columns if column.name not in 'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE','DSS_CURRENT_FLAG'-%}
+{% for column in dest_columns if column.name not in \'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE','DSS_CURRENT_FLAG'\-%}
 tmp.{{ column.name }}
 {% if not loop.last  %}, {%- endif %}
 {%- endfor %}
 from {{temp_relation}} as tmp
 EXCEPT
 select
-{% for column in dest_columns if column.name not in 'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE','DSS_CURRENT_FLAG'-%}
+{% for column in dest_columns if column.name not in \'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE','DSS_CURRENT_FLAG'\-%}
 trg.{{ column.name }}
 {% if not loop.last  %}, {%- endif %}
 {%- endfor %}
@@ -69,7 +69,7 @@ DSS_END_DATE = dateadd(second, -1, {{ CurrentTimeStamp }})
 ,DSS_UPDATE_DATE = {{ CurrentTimeStamp }}
 when matched and (DBT_INTERNAL_DEST.DSS_CURRENT_FLAG = 'Y')
 then update set
-{% for column in dest_columns if ((column.name not in business_key_list) and (column.name not in change_key_list) and (column.name not in 'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_CURRENT_FLAG')) -%}
+{% for column in dest_columns if ((column.name not in business_key_list) and (column.name not in change_key_list) and (column.name not in \'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_CURRENT_FLAG'\)) -%}
 {% if column.name == 'DSS_UPDATE_DATE' -%}
 {{ column.name }} = {{ CurrentTimeStamp }}
 {% else -%}
@@ -95,7 +95,7 @@ when not matched then insert
 values
 (
 {% for column in dest_columns -%}
-{% if column.name in 'DSS_START_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE' -%}
+{% if column.name in \'DSS_START_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE'\ -%}
 {{ CurrentTimeStamp }}
 {% elif column.name == 'DSS_END_DATE' -%}
 {{ distant_future }}
@@ -119,7 +119,7 @@ select {{temp_relation}}.*
 from {{temp_relation}}
 EXCEPT
 select
-{% for column in dest_columns if column.name not in 'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE','DSS_CURRENT_FLAG'-%}
+{% for column in dest_columns if column.name not in \'DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE','DSS_CURRENT_FLAG'\-%}
 {{target_relation}}.{{ column.name }}
 {% if not loop.last  %}, {%- endif %}
 {%- endfor %}
