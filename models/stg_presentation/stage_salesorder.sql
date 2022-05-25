@@ -44,7 +44,7 @@ SELECT
     ON stage_salesorderheader.customerid = dim_customer.businessentityid
     LEFT OUTER JOIN {{ ref('dim_employee')}}
     ON stage_salesorderheader.salespersonid = dim_employee.businessentityid
-    AND dim_employee.dss_current_flag = @v_dss_current_flag
+    AND dim_employee.dss_current_flag = 'Y'
     LEFT OUTER JOIN {{ ref('dim_product')}}
     ON stage_salesorderdetail.productid = dim_product.productid
     LEFT OUTER JOIN {{ ref('dim_order_date')}}
