@@ -1,6 +1,0 @@
-version: 2
-models:
-- name: stage_customer
-  description: Table containing data for stage_customer
-- name: stage_employee
-  description: Table containing data for stage_employee
