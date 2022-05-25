@@ -1,8 +1,8 @@
 SELECT
-    IFNULL(dim_customer.dim_customer_key,0) dim_customer_key,
-    IFNULL(dim_employee.dim_employee_key,0) dim_employee_key,
-    IFNULL(dim_product.dim_product_key,0) dim_product_key,
-    IFNULL(dim_order_date.dim_order_date_key,0) dim_order_date_key,
+    IFNULL(dim_customer.dim_customer_key,'0') dim_customer_key,
+    IFNULL(dim_employee.dim_employee_key,'0') dim_employee_key,
+    IFNULL(dim_product.dim_product_key,'0') dim_product_key,
+    IFNULL(dim_order_date.dim_order_date_key,'0') dim_order_date_key,
     stage_salesorderheader.salesorderid,
     stage_salesorderheader.revisionnumber,
     stage_salesorderheader.orderdate,
