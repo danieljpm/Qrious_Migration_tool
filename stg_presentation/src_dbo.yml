@@ -1,0 +1,26 @@
+version: 2
+sources:
+- name: DBT_STG
+  database: DW_SALES_ANALYTICS
+  schema: DBT_STG
+  tables:
+  - name: dim_date
+    description: Static Date table, needs to be source for dbt
+    columns:
+    - name: dim_date_key
+      tests:
+      - unique
+      - not_null
+    - name: calendar_date
+      tests:
+      - unique
+  - name: load_customer
+    description: Table containing data for load_customer
+  - name: load_employee
+    description: Table containing data for load_employee
+  - name: load_product
+    description: Table containing data for load_product
+  - name: load_salesorderdetail
+    description: Table containing data for load_salesorderdetail
+  - name: load_salesorderheader
+    description: Table containing data for load_salesorderheader
