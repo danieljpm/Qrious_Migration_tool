@@ -8,7 +8,7 @@
     {%- set existing_relation = load_relation(this) -%}
     {% if existing_relation is none or should_full_refresh() %}
     --  If table does not yet exist, create new table and set initial dss values
-        {%- set build_sql = ds_and_dim_initial_create_sql(target_relation, tmp_relation, change_key) %}
+        {%- set build_sql = ds_and_dim_initial_create_sql(target_relation, tmp_relation, business_key, change_key) %}
     {% else %}
     -- Table exist, update and age records
         {%- set build_sql = ds_and_dim_update_sql(target_relation, tmp_relation, business_key, change_key) %}
