@@ -50,4 +50,4 @@ dim_date.trading_day_flag as order_trading_day_flag,
 dim_date.trading_days_in_mth as order_trading_days_in_mth,
 dim_date.trading_days_so_far as order_trading_days_so_far,
 dim_date.dss_update_time as dss_update_time
-FROM {{ ref('dim_date')}} dim_date
+FROM {{ source('DBT_STG','dim_date')}} dim_date
