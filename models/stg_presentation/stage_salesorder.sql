@@ -44,8 +44,7 @@ SELECT
     ON stage_salesorderheader.customerid = dim_customer.businessentityid
     LEFT OUTER JOIN {{ ref('dim_employee')}}
     ON stage_salesorderheader.salespersonid = dim_employee.businessentityid
-    AND IFNULL(dim_employee.dss_start_date, GETDATE()-INTERVAL '10000 DAYS') <= stage_salesorderheader.orderdate
-    AND IFNULL(dim_employee.dss_end_date, GETDATE()+INTERVAL '10000 DAYS') >= stage_salesorderheader.orderdate
+    AND dim_employee.dss_current_flag = @v_dss_current_flag
     LEFT OUTER JOIN {{ ref('dim_product')}}
     ON stage_salesorderdetail.productid = dim_product.productid
     LEFT OUTER JOIN {{ ref('dim_order_date')}}
