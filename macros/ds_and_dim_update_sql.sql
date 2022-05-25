@@ -112,7 +112,7 @@
         ;
     {% if change_key!='unknown' -%}
         insert into {{target_relation}}
-        select {{ dbt_utils.surrogate_key(business_key_list + change_key_list ) }} as {{temp_relation.name}}_KEY,
+        select {{ dbt_utils.surrogate_key(business_key_list + change_key_list ) }} as {{target_relation.name}}_KEY,
         {% for column in dest_columns if column.name not in ['DSS_START_DATE','DSS_END_DATE','DSS_CREATE_DATE','DSS_UPDATE_DATE','DSS_CURRENT_FLAG',target_relation.name|upper+'_KEY']-%}
             {{temp_relation}}.{{ column.name }}
             {% if not loop.last  %}, {%- endif %}
