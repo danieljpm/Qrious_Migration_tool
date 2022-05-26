@@ -13,7 +13,7 @@
     -- Table exist, update and age records
         {%- set build_sql = ds_and_dim_update_sql(target_relation, tmp_relation, business_key, change_key) %}
     {% endif %}
-{{- run_hooks(pre_hooks) -}}
+    {{- run_hooks(pre_hooks) -}}
     {%- call statement('main') -%}
         {{ build_sql }}
     {% endcall %}
