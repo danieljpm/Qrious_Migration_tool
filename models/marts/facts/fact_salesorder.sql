@@ -1,6 +1,6 @@
 {{ config(materialized='table',
-	pre_hook="{{pre_fact_operations(('TRUNCATE TABLE  ' ~ this ~ '')}}
-)}}"
+	pre_hook="{{pre_fact_operations(('TRUNCATE TABLE  ' ~ this ~ '')}}"
+)}}
 SELECT
       dim_customer_key
     , dim_employee_key
